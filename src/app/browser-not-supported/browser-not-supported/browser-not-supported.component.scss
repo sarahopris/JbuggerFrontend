@@ -1,0 +1,53 @@
+.unsupported-container {
+  position: absolute;
+  left: 40%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  font-size: 30px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.logo {
+  height: 70px;
+}
+
+a {
+  padding-left: 30px;
+  text-decoration: none;
+}
+
+#browsers {
+  padding-top: 15px;
+}
+
+.lang {
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+div {
+  padding: 10px;
+}
+
+.fade-in {
+  opacity: 1;
+  -webkit-animation: fadein 1s;
+  -moz-animation: fadein 1s;
+  -ms-animation: fadein 1s;
+  -o-animation: fadein 1s;
+  animation: fadein 1s;
+}
+
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,61 @@
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+.topMargin {
+  margin-top: 50px;
+}
+
+.rowSeparator {
+  margin-top: 5px;
+}
+
+.columnSeparator {
+  margin-left: 10px;
+}
+
+.invalid {
+  border: 1px solid red;
+}
+
+.leftMargin {
+  margin-left: 30px;
+  text-align: center;
+}
+
+.saveButton {
+  height: 2rem;
+  padding: 0 0.75rem;
+  background-color: #e6f4ff;
+  border: 2px solid #bfe3ff;
+  border-radius: 10px;
+  color: #008dff;
+  font-family: Arial;
+}
+
+//body { padding: 20px}
+.form-control.ng-touched.ng-invalid {
+  border: 2px solid red;
+}
+
+.submitButton {
+  top: 20px;
+  position: relative;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.container {
+  width: 60%;
+  padding-bottom: 10%;
+}
+
+
+:host ::ng-deep .p-dropdown-label {
+  font-size: 16px !important;
+}
+
+:host ::ng-deep .p-dropdown-items {
+  font-size: 16px !important;
+}

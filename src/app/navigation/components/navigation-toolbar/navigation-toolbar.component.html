@@ -1,0 +1,30 @@
+<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+<div class="topnav">
+  <div class="topnav-left">
+    <a id="home" href="home">{{'navigation.home'| translate}}</a>
+    <a id="users" href="users" class="navigation-link-user">{{'navigation.users'| translate}}</a>
+    <a id="bugs" href="bugs" class="navigation-link-bug active">{{'navigation.bugs'| translate}}</a>
+    <a id="roles" href="roles" class="navigation-link-rolePermission">{{'navigation.roles'| translate}}</a>
+  </div>
+
+  <div class="topnav-right">
+    <div class="position-select topnav-right" >
+      <p-selectButton class="selectbtn" [options]="translatedLanguages" [(ngModel)]="selectedLang" (onChange)="switchLang(selectedLang.code)" optionLabel="code"
+                      pTooltip="{{'navigation.language'| translate}}" tooltipPosition="right" ></p-selectButton>
+
+    </div>
+
+    <a id="notifications" class="pointer">
+      <app-notification [numberNew]="this.numberNew" [showNotifications]="this.showNotifications"></app-notification>
+    </a>
+
+    <a id="profile" class="pointer">
+      <app-change-password></app-change-password>
+    </a>
+
+    <a id="logout" class="pointer" (click)="logout()">{{'navigation.logout'| translate}}</a>
+
+  </div>
+</div>
+
+<p-toast position="bottom-right"></p-toast>

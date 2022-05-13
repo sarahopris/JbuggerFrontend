@@ -1,0 +1,230 @@
+.notification-icon:hover {
+  color: black;
+  border-radius: 40%;
+}
+
+.notification_dd {
+  z-index: 20;
+  color: black;
+  position: absolute;
+  margin-right: 95px;
+  top: 60px;
+  right: 0;
+  background: #fff;
+  width: 450px;
+  height: 700px !important;
+  overflow: auto;
+  border: 1px solid #c7d8e2;
+  border-radius: 3px;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.125), -10px -10px 30px rgba(0, 0, 0, 0.125);
+}
+
+.notification_dd:before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: 15px;
+  border: 10px solid;
+  border-color: transparent transparent #fff transparent;
+}
+
+.notification_dd li .notify_icon {
+  display: flex;
+}
+
+.notification_dd li {
+  height: 100px;
+  border-bottom: 1px solid #f1f2f4;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.notification_dd li:last-child {
+  border-bottom: 0;
+}
+
+.notification_dd li .notify_data {
+  margin: 0 15px;
+  width: 280px;
+}
+
+.notification_dd li .notify_data .title {
+  color: #000;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.notification_dd li .notify_data .sub_title {
+  color: black;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5px;
+  word-wrap: break-word;
+}
+
+.success .notify_status {
+  color: #47da89;
+}
+
+.notification_dd li.failed .notify_status {
+  color: #fb0001;
+}
+
+.notification_dd li.show_all {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.notification_dd li.show_all p {
+  font-weight: 700;
+  color: #3b80f9;
+  cursor: pointer;
+}
+
+.notification_dd li.show_all p:hover {
+  text-decoration: underline;
+}
+
+.topnav-right .icon_wrap:hover {
+  //color:#4481eb;
+}
+
+#bell {
+  font-size: 25px;
+}
+
+.notification_dd {
+  background-color: #EEEEEE;
+  height: 500px;
+  //width:600px;
+}
+
+.notifications.active .notification_dd {
+  display: block;
+}
+
+#bell {
+  font-size: 30px;
+}
+
+a {
+  margin-top: 3px;
+  float: left;
+  color: #f2f2f2;
+  //padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+a:hover {
+  color: #4481eb;
+}
+
+.big-title {
+  padding-left: 20px;
+  padding-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  //color:#4481eb;
+  //color:white;
+  color: black;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sub_title {
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.notification-welcome {
+  margin: 10px 20px;
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  height: 210px;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.125), -10px -10px 30px rgba(0, 0, 0, 0.125);
+  transition: 1s;
+  //overflow: hidden;
+}
+
+.notification-deactivated {
+  margin: 10px 20px;
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  height: 220px;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.125), -10px -10px 30px rgba(0, 0, 0, 0.125);
+  transition: 1s;
+}
+
+.notification-updated {
+  margin: 10px 20px;
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  height: 370px;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.125), -10px -10px 30px rgba(0, 0, 0, 0.125);
+  transition: 1s;
+  //overflow: hidden;
+}
+
+.notification-bug-updated {
+  margin: 10px 20px;
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  height: 250px;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.125), -10px -10px 30px rgba(0, 0, 0, 0.125);
+  transition: 1s;
+}
+
+.notification-bug-closed {
+  margin: 10px 20px;
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  height: 330px;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.125), -10px -10px 30px rgba(0, 0, 0, 0.125);
+  transition: 1s;
+}
+
+.notification-status-updated {
+  margin: 10px 20px;
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  height: 280px;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.125), -10px -10px 30px rgba(0, 0, 0, 0.125);
+  transition: 1s;
+}
+
+.notification-bug-closed {
+  margin: 10px 20px;
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  height: 250px;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.125), -10px -10px 30px rgba(0, 0, 0, 0.125);
+  transition: 1s;
+}
+
+.notification-welcome:hover,
+.notification-deactivated:hover,
+.notification-updated:hover,
+.notification-bug-updated:hover,
+.notification-bug-closed:hover,
+.notification-status-updated:hover {
+  transform: scale(1.05);
+}
+
+.notify_status {
+  float: right;
+  color: #47da89;
+}
+
+.see-more {
+  font-size: 15px;
+  text-decoration: underline;
+  color: #023e8a;
+}

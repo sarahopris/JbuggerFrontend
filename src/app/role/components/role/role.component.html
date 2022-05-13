@@ -1,0 +1,54 @@
+<app-navigation-toolbar></app-navigation-toolbar>
+
+<div class="rowSeparator marginSeparator">
+  <div>{{editRole()}}</div>
+  <div *ngIf="showEdit">
+
+    <div *ngIf="roleForm" class="topMargin">
+      <div [formGroup]="roleForm">
+        <div class="flex">
+          <div class="rowSeparator">{{'roles.role'| translate}}
+            <p-dropdown [options]="rolesOptions" formControlName="role"
+                        placeholder="{{'roles.role-placeholder'| translate}}" (onChange)="getPermButton()"></p-dropdown>
+            <label class="label info">{{selectedRole}}</label>
+          </div>
+        </div>
+        <br><br>
+
+        <div class="example-container">
+          <h2 style="font-family:Arial">{{'roles.current-perm'| translate}}</h2>
+          <div
+            cdkDropList
+            id="currPerm"
+            #todoList="cdkDropList"
+            [cdkDropListData]="currPermissions"
+            [cdkDropListConnectedTo]="[doneList]"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of currPermissions" cdkDrag>{{item}}</div>
+          </div>
+        </div>
+
+
+        <div class="example-container">
+          <h2 style="font-family:Arial">{{'roles.remaining-perm'| translate}}</h2>
+          <div
+            cdkDropList
+            id="remainingPerm"
+            #doneList="cdkDropList"
+            [cdkDropListData]="remainingPermissions"
+            [cdkDropListConnectedTo]="[todoList]"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of remainingPermissions" cdkDrag>{{item}}</div>
+          </div>
+        </div>
+      </div>
+
+      <br><br>
+      <div>
+        <button class="btn btn-primary" (click)="saveRoleChange()">{{'roles.changes'| translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

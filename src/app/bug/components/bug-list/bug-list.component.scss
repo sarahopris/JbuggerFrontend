@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+.p-datatable {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bug_list {
+  width: 96%;
+  margin: 40px auto auto;
+}
+
+.caption_label {
+  top: 10px;
+  position: absolute;
+}
+
+.chart{
+  background-color: #f1a805 !important;
+  margin-left: 2px !important;
+  border-color: #f1a805 !important;
+}
+
+th {
+  background: #2982dc !important;
+  color: white !important;
+  font-weight: bold !important;
+  text-align: center !important;
+}
+
+.bug_btn {
+  text-align: center !important;
+}
+
+.del_btn, .ed_btn {
+  margin-left: 0.5em;
+}
+
+.ed_btn, .del_btn, .info_btn {
+  border-radius: 50%;
+  padding: 12px 24px !important;
+  border-color: #ffffff;
+}
+
+.del_btn {
+  background: #ee091f;
+}
+
+.info_btn {
+  background: green;
+}
+
+
+.del_btn:hover {
+  background-color: #ee091f !important;
+  border-color: red !important;
+}
+
+.info_btn:hover {
+  background-color: green !important;
+  border-color: green !important;
+}
+
+.chart:hover{
+  background-color: #db9f0f !important;
+}
+
+td {
+  padding: 10px !important;
+  width: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis !important;
+}
+
+.icons * {
+  color: white !important;
+}
+
+.buttons {
+  width: 200px;
+}
+
+.export {
+  margin-left: 10px;
+}
+
+.toolbar-btn {
+  margin-right: 3px;
+}

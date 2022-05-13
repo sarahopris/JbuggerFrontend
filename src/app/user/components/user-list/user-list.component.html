@@ -1,0 +1,247 @@
+<app-navigation-toolbar></app-navigation-toolbar>
+
+<p-toolbar styleClass="p-mb-4">
+  <ng-template pTemplate="left">
+    <button pButton pRipple label=" {{'bug-list.new-label'| translate}}" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openAddDialog()"></button>
+  </ng-template>
+</p-toolbar>
+
+<div class="user-table">
+  <p-table #dt [value]="usersDB" [rows]="5" [paginator]="true" [rowHover]="true" styleClass="p-datatable-gridlines"
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>{{'user-list.fname'| translate}}</th>
+        <th>{{'user-list.lname'| translate}}</th>
+        <th>{{'user-list.mobile-number'| translate}}</th>
+        <th class="email-column">{{'user-list.email'| translate}}</th>
+        <th>{{'user-list.username'| translate}}</th>
+        <th>{{'user-list.roles'| translate}}</th>
+        <th>{{'user-list.status'| translate}}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.mobileNumber}}</td>
+        <td class="email-column">{{user.email}}</td>
+        <td>{{user.username}}</td>
+        <td>
+          <div *ngFor="let role of user.roles">
+            <div *ngIf="role.type === 'ADM'">
+              ADMIN
+            </div>
+
+            <div *ngIf="role.type === 'PM'">
+              PROJECT MANAGER
+            </div>
+
+            <div *ngIf="role.type === 'TM'">
+              TEST MANAGER
+            </div>
+
+            <div *ngIf="role.type === 'DEV'">
+              DEVELOPER
+            </div>
+
+            <div *ngIf="role.type === 'TEST'">
+              TESTER
+            </div>
+
+          </div>
+        </td>
+        <td>
+          <div  class="activate-deactivate-user">
+            <p-inputSwitch  appPermissionManagement [username]="user.username" [(ngModel)]="user.status"
+                           (onChange)="activateDeactivateUserDB(user.username)"></p-inputSwitch>
+          </div>
+
+        </td>
+        <td class="bug_btn">
+          <button pButton pRipple icon="pi pi-pencil" class="ed_btn" (click)="openEditDialog(user)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog [closable]="false" [(visible)]="userAddDialog"  [style]="{width: '450px'}" header="{{'user-list.details'| translate}}" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <form [formGroup]="userForm">
+      <div class="form-group">
+        <label for="firstName">{{'user-list.fname'| translate}}</label>
+        <input
+          [(ngModel)]="userDTO.firstName"
+          required
+          formControlName="firstName"
+          id="firstName"
+          type="text"
+          class="form-control">
+      </div>
+      <div
+        class="alert alert-danger"
+        *ngIf="userForm.controls.firstName.touched && !userForm.controls.firstName.valid">
+        <div *ngIf="userForm.controls.firstName.errors.required">
+          First Name is required
+        </div>
+      </div>
+
+      <!---------------  First Name---------------------->
+      <div class="form-group">
+        <label for="lastName"> {{'user-list.lname'| translate}}</label>
+        <input
+          [(ngModel)]="userDTO.lastName"
+          required
+          formControlName="lastName"
+          id="lastName"
+          type="text"
+          class="form-control">
+
+        <div
+          class="alert alert-danger"
+          *ngIf="userForm.controls.lastName.touched && !userForm.controls.lastName.valid">
+          <div *ngIf="userForm.controls.lastName.errors.required">
+            {{'user-list.required-lname'| translate}}
+          </div>
+        </div>
+      </div>
+
+      <!---------------  Last Name---------------------->
+      <div class="form-group">
+
+        <label for="mobileNumber"> {{'user-list.mobile-number'| translate}}</label>
+
+        <div class="flex">
+          <p-dropdown [options]="phonePrefix" formControlName="prefix"></p-dropdown>
+          <br>
+
+          <div class="columnSeparator" style="width: 100%">
+            <input
+              required
+              formControlName="mobileNumber"
+              id="mobileNumber"
+              type="text"
+              class="form-control"
+              pattern="^\d{9}$">
+          </div>
+        </div>
+        <div
+          class="alert alert-danger"
+          *ngIf="userForm.controls.mobileNumber.touched && !userForm.controls.mobileNumber.valid">
+          <div *ngIf="userForm.controls.mobileNumber.errors.required">
+            {{'user-list.required-number'| translate}}
+          </div>
+          <div *ngIf="userForm.controls.mobileNumber.errors.pattern">
+            {{'user-list.format-number'| translate}}
+          </div>
+        </div>
+      </div>
+
+      <!---------------  Mobile Number---------------------->
+      <div class="form-group">
+        <label for="mail"> {{'user-list.mail-address'| translate}}</label>
+        <input
+          [(ngModel)]="userDTO.email"
+          required
+          pattern="^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@msg.group"
+          formControlName="mail"
+          id="mail"
+          type="text"
+          class="form-control"
+        >
+
+        <div
+          class="alert alert-danger"
+          *ngIf="userForm.controls.mail.touched && !userForm.controls.mail.valid">
+          <div *ngIf="userForm.controls.mail.errors.required">
+            {{'user-list.required-mail'| translate}}
+          </div>
+          <div *ngIf="userForm.controls.mail.errors.pattern">
+            {{'user-list.format-mail'| translate}}
+          </div>
+        </div>
+      </div>
+
+      <!---------------  Mail ---------------------->
+      <div class="form-group">
+        <label> {{'user-list.roles'| translate}}</label> <br>
+
+        <div class="form-check form-check-inline" pTooltip="ADMIN" tooltipPosition="bottom">
+          <label class="form-check-label">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [value]="roleADM"
+              (change)="onCheckChange($event)"
+              [checked] = "hasRoleADM"
+            >
+            ADM
+          </label>
+        </div>
+
+        <div class="form-check form-check-inline" pTooltip="TEST MANAGER" tooltipPosition="bottom">
+          <label class="form-check-label">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [value]="roleTM"
+              [checked] = "hasRoleTM"
+              (change)="onCheckChange($event)"
+            >
+            TM
+          </label>
+        </div>
+
+        <div class="form-check form-check-inline" pTooltip="PROJECT MANAGER" tooltipPosition="bottom">
+          <label class="form-check-label">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [value]="rolePM"
+              [checked] = "hasRolePM"
+              (change)="onCheckChange($event)"
+            >
+            PM
+          </label>
+        </div>
+
+        <div class="form-check form-check-inline" pTooltip="DEVELOPER" tooltipPosition="bottom">
+          <label class="form-check-label">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [value]="roleDEV"
+              [checked] = "hasRoleDEV"
+              (change)="onCheckChange($event)"
+            >
+            DEV
+          </label>
+        </div>
+
+        <div class="form-check form-check-inline" pTooltip="TESTER" tooltipPosition="bottom">
+          <label class="form-check-label">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [checked] = "hasRoleTEST"
+              [value]="roleTEST"
+              (change)="onCheckChange($event)"
+            >
+            TEST
+          </label>
+        </div>
+      </div>
+
+    </form>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="submitButton">
+      <button class="btn btn-primary" (click)="saveUser()" id="save-btn">{{'user-list.save-user'| translate}}</button>
+      <button class="btn btn-primary" (click)="hideDialog()">{{'user-list.close'| translate}}</button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<br><br>br><br>

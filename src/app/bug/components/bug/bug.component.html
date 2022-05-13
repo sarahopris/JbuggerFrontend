@@ -1,0 +1,121 @@
+<app-navigation-toolbar></app-navigation-toolbar>
+<body>
+
+<div class="container_bug">
+  <br>
+  <div class="back_btn">
+    <p-button icon="pi pi-chevron-left" label="{{'bug.back-button'| translate }}"
+              onClick="location.href='http://localhost:4200/bugs'"></p-button>
+  </div>
+  <div class="back_btn">
+    <p-button pTooltip="Edit" label="Edit" (click)="navigateToEditBug(bug)" icon="pi pi-pencil"></p-button>
+  </div>
+  <div class="back_btn" *ngIf="hasExportPdfPermissionBool">
+    <p-button (click)="exportToPdf()" icon="pi pi-file-pdf" label="{{'bug.export'| translate }}"></p-button>
+  </div>
+
+  <h1>{{'bug.header'| translate}}</h1>
+  <div class="details">
+    <div class="attribute">
+      <div class="label">{{'bug.title'| translate}}:</div>
+      <div class="data">{{bug.title}}</div>
+    </div>
+    <div class="attribute">
+      <div class="label">{{'bug.description'| translate}}:</div>
+      <div class="data">{{bug.description}}</div>
+    </div>
+    <div class="attribute">
+      <div class="label">{{'bug.created'| translate}}:</div>
+      <div class="data">{{bug.createdByUsername}}</div>
+    </div>
+    <div class="attribute">
+      <div class="label">{{'bug.assigned'| translate}}:</div>
+      <div class="data">{{bug.assignedToUsername}}</div>
+    </div>
+    <div class="attribute">
+      <div class="label">{{'bug.version'| translate}}:</div>
+      <div class="data">{{bug.version}}</div>
+    </div>
+    <div class="attribute">
+      <div class="label">{{'bug.fixed'| translate}}:</div>
+      <div class="data">{{bug.fixedVersion !== null ? bug.fixedVersion : 'Not Fixed'}}</div>
+    </div>
+    <div class="attribute">
+      <div class="label">{{'bug.severity'| translate}}:</div>
+      <div class="data">{{bug.severity}}</div>
+    </div>
+    <div class="attribute">
+      <div class="label">{{'bug.status'| translate}}:</div>
+      <div class="data">{{bug.status}}</div>
+    </div>
+    <div class="attribute">
+      <div class="label">{{'bug.date'| translate}}:</div>
+      <div class="data">{{bug.targetDate === null ? 'No date' : bug.targetDate | date:'d.M.Y'}}</div>
+    </div>
+    <div class="attribute">
+      <div class="label">{{'bug.attachments'| translate}}:</div>
+      <div *ngIf="bug.attachments.length > 0">
+        <div class="data" *ngFor="let att of bug.attachments">
+          <a href="http://localhost:4300/bugs/{{bug.idBug}}/attachments/{{att.attContent}}">
+            {{att.attContent}}
+          </a><br>
+        </div>
+      </div>
+      <div class="data" *ngIf="bug.attachments.length === 0">
+        {{'bug.no-att'| translate}}
+      </div>
+    </div>
+
+  </div>
+  <br><br>
+</div>
+
+<div *ngIf="exportInCourse">
+  <div id="bug-{{bug.idBug}}-details" class="details">
+    <!-- for generating PDF -->
+    <div class="attributePDF">
+      <div class="labelPDF">{{'bug.title'| translate}}:</div>
+      <div class="dataPDF">{{bug.title}}</div>
+    </div>
+    <div class="attributePDF">
+      <div class="labelPDF">{{'bug.description'| translate}}:</div>
+      <div class="dataPDF">{{bug.description}}</div>
+    </div>
+    <div class="attributePDF">
+      <div class="labelPDF">{{'bug.createdPDF'| translate}}:</div>
+      <div class="dataPDF">{{bug.createdByUsername}}</div>
+    </div>
+    <div class="attributePDF">
+      <div class="labelPDF">{{'bug.assigned'| translate}}:</div>
+      <div class="dataPDF">{{bug.assignedToUsername}}</div>
+    </div>
+    <div class="attributePDF">
+      <div class="labelPDF">{{'bug.version'| translate}}:</div>
+      <div class="dataPDF">{{bug.version}}</div>
+    </div>
+    <div class="attributePDF">
+      <div class="labelPDF">{{'bug.fixedPDF'| translate}}:</div>
+      <div class="dataPDF">{{bug.fixedVersion !== null ? bug.fixedVersion : 'Not Fixed'}}</div>
+    </div>
+    <div class="attributePDF">
+      <div class="labelPDF">{{'bug.severity'| translate}}:</div>
+      <div class="dataPDF">{{bug.severity}}</div>
+    </div>
+    <div class="attributePDF">
+      <div class="labelPDF">{{'bug.status'| translate}}:</div>
+      <div class="dataPDF">{{bug.status}}</div>
+    </div>
+    <div class="attributePDF">
+      <div class="labelPDF">{{'bug.datePDF'| translate}}:</div>
+      <div
+        class="dataPDF">{{bug.targetDate === null ? ('bug.no-datePDF' | translate) : bug.targetDate | date:'d.M.Y'}}</div>
+    </div>
+    <div class="attributePDF">
+      <div class="labelPDF">{{'bug.attachmentsPDF'| translate}}:</div>
+      <div class="dataPDF" *ngIf="bug.attachments.length === 0">
+        {{'bug.no-attPDF'| translate}}
+      </div>
+      <div class="dataPDF"></div>
+    </div>
+  </div>
+</div>

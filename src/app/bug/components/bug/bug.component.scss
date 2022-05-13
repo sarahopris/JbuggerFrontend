@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container_bug {
+  margin: 80px auto;
+  width: 60%;
+}
+
+.back_btn {
+  float: right;
+  margin-right: 20px;
+}
+
+.label {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.labelPDF {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.data {
+  padding-top: 2px;
+  font-size: 18px;
+  margin-top: 20px;
+  text-align: left;
+  height: auto;
+}
+
+.dataPDF {
+  padding-top: 2px;
+  font-size: 10px;
+  margin-top: 9px;
+  text-align: left;
+  height: auto;
+}
+
+.attribute {
+  display: grid;
+  grid-template-columns: 136px 650px;
+  grid-gap: 50px;
+}
+
+.attributePDF {
+  display: grid;
+  grid-template-columns: 85px 425px;
+  grid-gap: 10px;
+}
+
+
+
+
+

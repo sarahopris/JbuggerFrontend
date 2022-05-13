@@ -1,0 +1,80 @@
+<div class="login-page">
+  <div class="container">
+    <div class="forms-container">
+      <div class="signin-signup">
+        <form [formGroup]="loginForm" action="#" class="sign-in-form" (ngSubmit)="onSubmit()" autocomplete="off">
+          <h2 class="title">{{'login.title'| translate}}</h2>
+
+          <div class="alert alert-danger" role="alert" *ngIf="isFormInvalid">
+            {{'login.textFormInvalid'| translate}}
+          </div>
+
+          <div class="alert alert-danger" role="alert" *ngIf="areCredentialsInvalid">
+            {{'login.textCredentialsInvalid'| translate}}
+          </div>
+
+
+          <div class="alert alert-danger" role="alert" *ngIf="isCaptchaUnchecked">
+            {{'login.textCaptchaUnchecked'| translate}}
+          </div>
+
+
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" name="username" id="inputUsername" formControlName="username"
+                   [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="{{'login.username'| translate}}" required
+                   autofocus ngModel/>
+
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="password" id="inputPassword" formControlName="password"
+                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="{{'login.password'| translate}}" required
+                   ngModel/>
+
+          </div>
+
+          <div>
+            <form [formGroup]="aFormGroup">
+              <ngx-recaptcha2 #captchaElem
+                              [siteKey]="siteKey"
+                              formControlName="recaptcha">
+              </ngx-recaptcha2>
+            </form>
+          </div>
+
+
+          <div class="form-group">
+            <button [disabled]="loading" type="submit" class="btn solid">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              {{'login.loginAccount'| translate}}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>{{'login.welcome'| translate}}</h3>
+          <p>
+            {{'login.message'| translate}}
+          </p>
+        </div>
+        <img class="image"/>
+      </div>
+    </div>
+  </div>
+    <div>
+      <p-selectButton class="lang-dropdown" [options]="translatedLanguages"  [(ngModel)]="selectedLang" (onChange)="switchLang(selectedLang.code)"  optionLabel="name"></p-selectButton>
+    </div>
+</div>
+
+<p-dialog header="Ups..." position="top-right" [(visible)]="displayModal" [style]="{width: '700px'}">
+  {{'login.wrongpassword'| translate}}
+</p-dialog>
+
+<p-dialog header="Warning!" position="top-right" [style]="{width: '700px'}" [(visible)]="displayModalAfterFourBadPassword">
+  {{'login.warning'| translate}}
+</p-dialog>

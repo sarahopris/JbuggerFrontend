@@ -1,0 +1,86 @@
+<app-navigation-toolbar></app-navigation-toolbar>
+
+<div class="container">
+  <br>
+  <div class="back_btn">
+    <p-button icon="pi pi-chevron-left" label="{{'newbug.back'| translate}}"
+              onClick="location.href='http://localhost:4200/bugs'"></p-button>
+  </div>
+  <h1>{{'newbug.create'| translate}}</h1>
+  <br>
+  <form [formGroup]="newBugForm">
+    <div class="form-group">
+      <label for="title">{{'bug-list.title'| translate}}</label>
+      <input type="text" class="form-control" id="title" formControlName="title" required autocomplete="off">
+      <div *ngIf="!newBugForm.controls.title.valid && !newBugForm.controls.title.untouched"
+           class="alert alert-danger">
+        {{'editbug.required'| translate}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">{{'editbug.description'| translate}}</label>
+      <textarea id="description" class="form-control" rows="10" cols="70" formControlName="description"
+                required></textarea>
+      <div *ngIf="!newBugForm.controls.description.valid && !newBugForm.controls.description.untouched"
+           class="alert alert-danger">
+        {{'editbug.desc-alert'| translate}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="severity">{{'bug-list.severity'| translate}}</label>
+      <p-dropdown id="severity" formControlName="severity" [options]="severityList"
+                  [(ngModel)]="severityModel"
+                  [style]="{'width':'100%','font-family': 'Poppins, sans-serif', 'font-weight': 550}"></p-dropdown>
+    </div>
+
+    <div class="form-group">
+      <label for="version">{{'bug-list.version'| translate}}</label>
+      <input type="text" id="version" class="form-control" formControlName="version" required autocomplete="off">
+      <div *ngIf="!newBugForm.controls.version.valid && !newBugForm.controls.version.untouched"
+           class="alert alert-danger">
+        {{'editbug.version-alert'| translate}}
+      </div>
+    </div>
+
+    <div class=" form-group">
+      <label for="target-date"> {{'newbug.date'| translate}}</label>
+      <input type="date" id="target-date" class="form-control" formControlName="targetDate">
+    </div>
+
+    <div class="form-group">
+      <label for="assigned-to"> {{'editbug.assigned-label'| translate}}</label><br>
+      <p-autoComplete id="assigned-to" [(ngModel)]="formControlValue" [suggestions]="output"
+                      (completeMethod)="findChoices($event.query)"
+                      formControlName="assignedToUsername"
+                      [formGroup]="newBugForm"
+                      [style]="{'width':'100%'}"
+                      [inputStyle]="{'font-family': 'Poppins, sans-serif'}"
+                      placeholder=" {{'editbug.assigned-placeholder'| translate}}"
+                      [dropdown]="true"></p-autoComplete>
+    </div>
+
+    <div class="form-group">
+      <label for="attachments">{{'newbug.attachments'| translate}}</label><br>
+      <div class="form-control" id="file-upload">
+        <input type="file" id="attachments" formControlName="attachments" multiple
+               accept="image/*, application/pdf, application/msword,
+                 application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                application/vnd.oasis.opendocument.spreadsheet,
+                application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+                application/vnd.ms-excel" (change)="onFileChange($event)"><br>
+        <span class="file-upload-text-ok" id="file-upload-text-new-bug">
+           {{'editbug.accepted-att'| translate}}
+          </span><br>
+        <span class="file-upload-text-ok" id="file-upload-size-text">
+            {{'editbug.size'| translate}}
+          </span>
+      </div>
+    </div>
+    <button type="button" *ngIf="!buttonPushed" class="btn btn-default" (click)="onSubmit()"
+            [disabled]="!isAllValid()">{{'newbug.submit'| translate}}
+    </button>
+    <div *ngIf="buttonPushed" class="btn btn-default">{{'editbug.processing'| translate}}</div>
+  </form>
+</div>

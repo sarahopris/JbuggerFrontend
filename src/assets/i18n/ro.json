@@ -1,0 +1,232 @@
+{
+  "openChartDialog": "Statistica defectelor",
+  "login": {
+    "title": "Autentificare",
+    "textFormInvalid": " Completează toate câmpurile!",
+    "textCredentialsInvalid": "Numele de utilizator și parola sunt invalide!",
+    "textCaptchaUnchecked": "Vă rugăm verificați capcha!",
+    "loginAccount": "Logare",
+    "welcome": "Bine ați venit în aplicația JBugger!",
+    "message": "Pentru a putea accesa informațiile despre utilizatori și bug-uri și pentru a face schimbări in baza noastră de date, \n            va rugăm să va autentificați.",
+    "wrongpassword":"Ne pare rău! Ai introdus o parolă greșită de mai mult de 4 ori. Vă rugam să contactați service-ul nostru pentru a vă debloca contul.",
+    "warning": "Mai aveți incă o încercare pentru a introduce parola corectă!",
+    "username": "Nume de utilizator",
+    "password": "Parola",
+    "language": "Limba:"
+  },
+
+  "bug":{
+    "back-button": "Înapoi",
+    "export": "Descarcă",
+    "header": "Informații despre bug",
+    "title":"Titlu",
+    "description": "Descriere",
+    "created": "Creat de către",
+    "createdPDF": "Creat de catre",
+    "assigned": "Atribuit",
+    "status": "Status",
+    "severity": "Severitate",
+    "version": "Versiune",
+    "fixed": "Versiunea bună",
+    "fixedPDF": "Versiunea buna",
+    "date": "Data limită",
+    "datePDF": "Data limita",
+    "attachments": "Atașamente",
+    "attachmentsPDF": "Atasamente",
+    "no-att": "Nu există atașamente pentru acest bug.",
+    "no-attPDF": "Nu exista atasamente pentru acest bug.",
+    "no-date": "Nu este precizată data limită.",
+    "no-datePDF": "Nu este precizată data limita."
+  },
+  "navigation": {
+    "language": "Limba",
+    "home": "Acasă",
+    "users": "Utilizatori",
+    "bugs": "Defecte",
+    "registration": "Înregistrare",
+    "roles": "Roluri",
+    "logout": "Delogare"
+  },
+    "bug-list": {
+      "chart-label": " Statistică",
+      "new-label": "Nou",
+      "current": "Afișează de la {first} la {last} din {totalRecords} intrări",
+      "title": "Titlu",
+      "description": "Descriere",
+      "created": "Creat de către",
+      "assigned": "Atribuit",
+      "status": "Status",
+      "severity": "Severitate:",
+      "version": "Versiune",
+      "fixed": "Versiunea fixată",
+      "date": "Data limită",
+      "edit": "Editează",
+      "close": "Inchide",
+      "actions": "Acțiuni",
+      "search": "Caută după titlu..."
+    },
+  "editbug": {
+    "header": "Editează defectul",
+    "back": "Inapoi catre lista de defecte",
+    "required": "Titlul este necesar",
+    "description": "Descriere:",
+    "desc-alert": " Descrierea este necesară și trebuie sa aiba minim 250 caractere.",
+    "severity-alert":" Trebuie sa selectați severitatea.",
+    "status-alert": "Trebuie sa selectați statusul.",
+    "version-alert": "Versiunea este necesară și trebuie sa fie un string alphanumeric.\n        Ca și delimitator, doar punctul poate fi folosit.",
+    "fixed-label": "Versiunea fixată:",
+    "fixed-alert": "Versiunea fixată trebuie sa fie un string alphanumeric.\n        Ca și delimitator, doar punctul poate fi folosit.",
+    "assigned-label": "Atribuit lui (nu completați dacă doriți să vi-l atribuiți dvs):",
+    "assigned-placeholder": "Tastează pentru a căuta...",
+    "existing-att": "Fișierele atașate acestui defect:",
+    "no-att": "Nu a fost atașat niciun fișier până acum pentru acest defect" ,
+    "delete-att": "Toate fișierele atașate pană acum pentru acest defect vor fi șterse ",
+    "attachment": "Încărcați noi atașamente:",
+    "accepted-att": "Tipuri de fișiere atașate: image, pdf, doc, docx, odf, xlsx, xls.",
+    "size": " Dimensiunea maximă a fișierelor: 25MB",
+    "save": "Salvați modificările",
+    "processing": "Se procesează..."
+  },
+  "newbug": {
+    "create": "Creați un defect nou",
+    "back": "Înapoi la lista de defecte",
+    "date": "Data limită:",
+    "attachments": "Încărcați atașamente:",
+    "submit": "Submit"
+  },
+
+  "user-list": {
+    "fname": "Prenume",
+    "lname": "Nume de familie",
+    "mobile-number": "Nr. de Telefon",
+    "email": "Email",
+    "username": "Nume de utilizator",
+    "roles": "Roluri",
+    "status": "Status",
+    "required-lname": "Numele de familie este necesar",
+    "required-fname": "Prenumele este necesar",
+    "required-number": "Numarul mobil este necesar",
+    "format-number": "Format nepotrivit: introduceți doar 9 cifre ",
+    "mail-address": "Mail",
+    "required-mail": "Adresa de mail este necesară",
+    "format-mail": "Adresa de mail nu are formatul potrivit : [mail]@msg.group",
+    "save-user": "Salvați utilizatorul",
+    "close": "Închide",
+    "details": "Detaliile utilizatorului"
+  },
+  "roles": {
+    "role": "Rol:",
+    "role-placeholder": "Selectați un rol",
+    "current-perm": "Drepturile curente",
+    "remaining-perm": "Drepturile rămase",
+    "changes": "Salvați modificările"
+
+  },
+
+
+  "unsupported": {
+    "hello": "Salutări, vizitator drag!",
+    "bad-news": "Din păcate, avem o veste rea pentru tine.",
+    "not-supported": "Browserul tău nu este suportat de către pagina noastă. :(",
+    "suggest": "Dar îți putem recomanda două browsere faimoase, cu care aplicația noastră funcționează exact așa cum ne-am imaginat noi!",
+    "go-and-try": "Hai și încearcă cea mai nouă versiune a unei dintre acestea:"
+  },
+
+  "home": {
+    "welcome": "Bine ai venit în JBugger!",
+    "description": "Aceasta este aplicația creată de echipa D care constă în:Endre Csorvasi, Ervin-Istvan Demian, Sarah-Maria Opris, Cosmina Radu și Naomi-Andrea Toth. Ca parte a instruirii noastre în Java, am încapsulat cunoștiințele acumulate în ultimele 6 săptămâni în proiectul nostru. "
+  },
+
+  "notification" : {
+    "new": "NOU",
+    "welcomeUser": {
+      "title": "BINE AI VENIT",
+      "subTitle": "Bine ai venit",
+      "account": "Informații despre cont",
+      "firstname": "Prenume",
+      "lastname": "Nume",
+      "mobile" : "Număr de telefon",
+      "email": "Email"
+    },
+    "userDeactivated" : {
+      "title": "UTILIZATOR DEZACTIVAT",
+      "subTitle1": "Utilizatorul cu numele ",
+      "subTitle2": " a fost dezactivat.",
+      "account": "Informații despre contul dezactivat",
+      "firstname": "Prenume",
+      "lastname": "Nume",
+      "mobile" : "Număr de telefon",
+      "email": "Email"
+    },
+    "userUpdated": {
+      "title": "UTILIZATOR EDITAT",
+      "subTitle1": "Utilizatorul cu numele ",
+      "subTitle2" : " a fost schimbat",
+      "oldAccount": "Informații depsre contul vechi",
+      "newAccount": "Informații despre contul nou",
+      "firstname": "Prenume",
+      "lastname": "Nume",
+      "mobile" : "Număr de telefon",
+      "email": "Email",
+      "newFirstname": "Prenume",
+      "newLastname": "Nume",
+      "newMobile": "Număr de telefon",
+      "newEmail": "Email"
+    },
+    "bugUpdated": {
+      "title": "DEFECT EDITAT",
+      "subTitle1": "Defectul cu titlul ",
+      "subTitle2": " a fost editat",
+      "details": "Detalii despre defect",
+      "bugTitle": "Titlu",
+      "bugVersion": "Versiune",
+      "bugFixedVersion": "Versiune fixată",
+      "bugTargetDate": "Dată țintă",
+      "status": "Status"
+
+    },
+    "bugClosed": {
+      "title": "DEFECT ÎNCHIS",
+      "subTitle1": "Defectul cu titlul ",
+      "subTitle2": " a fost închis.",
+      "details": "Detalii despre defect",
+      "bugTitle": "Titlu",
+      "bugVersion": "Versiune",
+      "bugFixedVersion": "Versiune fixată",
+      "bugTargetDate": "Dată țintă",
+      "status": "Status"
+
+    },
+    "bugStatusUpdated": {
+      "oldStatus": "Statusul defectului vechi",
+      "title": "STATUSUL DEFECTULUI SCHIMBAT",
+      "subTitle1": "Statusul defectului cu titlul ",
+      "subTitle2": " a fost schimbat.",
+      "details": "Detalii despre defect",
+      "bugTitle": "Titlu",
+      "bugVersion": "Versiune",
+      "bugFixedVersion": "Versiune fixată",
+      "bugTargetDate": "Dată țintă",
+      "status": "Status"
+    }
+  },
+  "change-pass": {
+    "header": "Detalii despre profilul tău",
+    "fname": "Prenume",
+    "fname-required": "Introduceți prenumele",
+    "lname": "Nume",
+    "lname-required": "Introduceți numele de familie",
+    "mobile-nr": "Număr de telefon",
+    "nr-required": "Introduceți nr. de telefon",
+    "nr-format": "Format nepotrivit: adauagți doar 9 cifre ",
+    "current-pass": "Parola curentă",
+    "please": "Introduceți parola curentă",
+    "new-pass": "Parola nouă",
+    "enter-newpass": "Introduceți parola nouă!",
+    "confirm": "Confirmați schimbarea parolei",
+    "please-confirm": "Te rog să confirmi noua parolă",
+    "change-password": "Schimbă parola",
+    "save": "Salvați modificările",
+    "close": "Închide"
+  }
+}

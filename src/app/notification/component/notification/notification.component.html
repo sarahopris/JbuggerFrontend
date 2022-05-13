@@ -1,0 +1,145 @@
+<a class="notification-icon" (click)="toggleNotifications()">
+  <div class="notifications">
+    <div class="icon_wrap">
+      <i class="far fa-bell" id="bell" pBadge value="{{this.numberNew}}"></i>
+    </div>
+    <div *ngIf="showNotifications" class="notification_dd">
+      <!--      <div class="big-title"> Notifications </div>-->
+      <div *ngFor="let notificationDTO of notificationDTOs.slice().reverse()">
+        <div class="notification-welcome" *ngIf="notificationDTO.type==='WELCOME_NEW_USER'">
+          <div class="notify_data">
+            <span class="title">
+             {{'notification.welcomeUser.title' | translate}}
+            </span>
+            <!--            <span class="notification-date">{{notificationDTO.date}}</span>-->
+            <span *ngIf="notificationDTO.read === false" class="notify_status"> {{'notification.new' | translate}} </span>
+
+            <div class="sub_title">
+              {{'notification.welcomeUser.subTitle' | translate}} {{notificationDTO.message.split(';').slice(4, 5)}}! <br><br>
+              {{'notification.welcomeUser.account' | translate}}:<br>
+              {{'notification.welcomeUser.firstname' | translate}}: {{notificationDTO.message.split(';').slice(0, 1)}}<br>
+              {{'notification.welcomeUser.lastname' | translate}}: {{notificationDTO.message.split(';').slice(1, 2)}}<br>
+              {{'notification.welcomeUser.mobile' | translate}}: {{notificationDTO.message.split(';').slice(2, 3)}}<br>
+              {{'notification.welcomeUser.email' | translate}}: {{notificationDTO.message.split(';').slice(3, 4)}}
+            </div>
+          </div>
+        </div>
+
+        <div class="notification-deactivated" *ngIf="notificationDTO.type==='USER_DEACTIVATED'">
+          <div class="notify_data">
+            <span class="title">
+              {{'notification.userDeactivated.title' | translate}}
+            </span>
+            <!--            <span class="notification-date">{{notificationDTO.date}}</span>-->
+            <span *ngIf="notificationDTO.read === false" class="notify_status"> {{'notification.new' | translate}} </span>
+
+            <div class="sub_title">
+              {{'notification.userDeactivated.subTitle1' | translate}} {{notificationDTO.message.split(';').slice(4, 5)}} {{'notification.userDeactivated.subTitle2' | translate}} <br>
+              {{'notification.userDeactivated.account' | translate}}:<br>
+              {{'notification.userDeactivated.firstname' | translate}}: {{notificationDTO.message.split(';').slice(0, 1)}}<br>
+              {{'notification.userDeactivated.lastname' | translate}}: {{notificationDTO.message.split(';').slice(1, 2)}}<br>
+              {{'notification.userDeactivated.mobile' | translate}}: {{notificationDTO.message.split(';').slice(2, 3)}}<br>
+              {{'notification.userDeactivated.email' | translate}}: {{notificationDTO.message.split(';').slice(3, 4)}}
+            </div>
+          </div>
+          <!--          <a class="see-more" (click)="seeMore(notificationDTO)"> See more</a>-->
+        </div>
+
+        <div class="notification-updated" *ngIf="notificationDTO.type==='USER_UPDATED'">
+          <div class="notify_data">
+            <span class="title">
+              {{'notification.userUpdated.title' | translate}}
+            </span>
+            <span *ngIf="notificationDTO.read === false" class="notify_status"> {{'notification.new' | translate}} </span>
+
+            <div class="sub_title">
+              {{'notification.userUpdated.subTitle1' | translate}} {{notificationDTO.message.split(';').slice(4, 5)}} {{'notification.userUpdated.subTitle2' | translate}} <br><br>
+              {{'notification.userUpdated.oldAccount' | translate}}:<br>
+              {{'notification.userUpdated.firstname' | translate}}: {{notificationDTO.message.split(';').slice(0, 1)}}<br>
+              {{'notification.userUpdated.lastname' | translate}}: {{notificationDTO.message.split(';').slice(1, 2)}}<br>
+              {{'notification.userUpdated.mobile' | translate}}: {{notificationDTO.message.split(';').slice(2, 3)}}<br>
+              {{'notification.userUpdated.email' | translate}}: {{notificationDTO.message.split(';').slice(3, 4)}} <br><br>
+              {{'notification.userUpdated.newAccount' | translate}}: <br>
+              {{'notification.userUpdated.newFirstname' | translate}}: {{notificationDTO.message.split(';').slice(5, 6)}}<br>
+              {{'notification.userUpdated.newLastname' | translate}}: {{notificationDTO.message.split(';').slice(6, 7)}}<br>
+              {{'notification.userUpdated.newMobile' | translate}}: {{notificationDTO.message.split(';').slice(7, 8)}}<br>
+              {{'notification.userUpdated.newEmail' | translate}}: {{notificationDTO.message.split(';').slice(8, 9)}} <br><br>
+            </div>
+          </div>
+        </div>
+
+        <div class="notification-bug-updated" *ngIf="notificationDTO.type==='BUG_UPDATED'">
+          <div class="notify_data">
+            <span class="title">
+              {{'notification.bugUpdated.title' | translate}}
+            </span>
+            <span *ngIf="notificationDTO.read === false" class="notify_status"> {{'notification.new' | translate}} </span>
+
+            <div class="sub_title">
+              {{'notification.bugUpdated.subTitle1' | translate}} {{notificationDTO.message.split(';').slice(0, 1)}} {{'notification.bugUpdated.subTitle2' | translate}}. <br><br>
+              {{'notification.bugUpdated.details' | translate}}<br>
+              {{'notification.bugUpdated.bugTitle' | translate}}: {{notificationDTO.message.split(';').slice(0, 1)}}<br>
+              <!--              Description: {{notificationDTO.message.split(',').slice(1, 2)}}<br>-->
+              {{'notification.bugUpdated.bugVersion' | translate}}: {{notificationDTO.message.split(';').slice(2, 3)}}<br>
+              {{'notification.bugUpdated.bugFixedVersion' | translate}}: {{notificationDTO.message.split(';').slice(3, 4)}}<br>
+              {{'notification.bugUpdated.bugTargetDate' | translate}}: {{notificationDTO.message.split(';').slice(4, 5)}}<br>
+              {{'notification.bugUpdated.status' | translate}}: {{notificationDTO.message.split(';').slice(5,6)}}<br>
+              <!--              Severity:{{notificationDTO.message.split(',').slice(5,6)}} <br><br>-->
+            </div>
+          </div>
+        </div>
+
+        <div class="notification-bug-closed" *ngIf="notificationDTO.type==='BUG_CLOSED'">
+          <div class="notify_data">
+            <span class="title">
+              {{'notification.bugClosed.title' | translate}}
+            </span>
+            <span *ngIf="notificationDTO.read === false" class="notify_status"> {{'notification.new' | translate}} </span>
+
+            <div class="sub_title">
+              {{'notification.bugClosed.subTitle1' | translate}} {{notificationDTO.message.split(';').slice(0, 1)}} {{'notification.bugClosed.subTitle2' | translate}} <br><br>
+              {{'notification.bugClosed.details' | translate}}<br>
+              {{'notification.bugClosed.bugTitle' | translate}}: {{notificationDTO.message.split(';').slice(0, 1)}}<br>
+              <!--              Description: {{notificationDTO.message.split(',').slice(1, 2)}}<br>-->
+              {{'notification.bugClosed.bugVersion' | translate}}: {{notificationDTO.message.split(';').slice(2, 3)}}<br>
+              {{'notification.bugClosed.bugFixedVersion' | translate}}: {{notificationDTO.message.split(';').slice(3, 4)}}<br>
+              {{'notification.bugClosed.bugTargetDate' | translate}}: {{notificationDTO.message.split(';').slice(4, 5)}}<br>
+              {{'notification.bugClosed.status' | translate}}: {{notificationDTO.message.split(';').slice(5,6)}}<br>
+
+              <!--              Severity: {{notificationDTO.message.split(',').slice(5,6)}} <br><br>-->
+            </div>
+          </div>
+        </div>
+
+        <div class="notification-status-updated" *ngIf="notificationDTO.type==='BUG_STATUS_UPDATED'">
+          <div class="notify_data">
+            <span class="title">
+              {{'notification.bugStatusUpdated.title' | translate}}
+            </span>
+            <span *ngIf="notificationDTO.read === false" class="notify_status"> {{'notification.new' | translate}} </span>
+
+            <div class="sub_title">
+              {{'notification.bugStatusUpdated.subTitle1' | translate}} {{notificationDTO.message.split(';').slice(0, 1)}} {{'notification.bugStatusUpdated.subTitle2' | translate}} <br><br>
+              {{'notification.bugStatusUpdated.details' | translate}}<br>
+              {{'notification.bugStatusUpdated.bugTitle' | translate}}: {{notificationDTO.message.split(';').slice(0, 1)}}<br>
+              <!--              Description: {{notificationDTO.message.split(',').slice(1, 2)}}<br>-->
+
+              {{'notification.bugStatusUpdated.bugVersion' | translate}}: {{notificationDTO.message.split(';').slice(2, 3)}}<br>
+              {{'notification.bugStatusUpdated.bugFixedVersion' | translate}}: {{notificationDTO.message.split(';').slice(3, 4)}}<br>
+              {{'notification.bugStatusUpdated.bugTargetDate' | translate}}: {{notificationDTO.message.split(';').slice(4, 5)}}<br>
+              {{'notification.bugStatusUpdated.status' | translate}}: {{notificationDTO.message.split(';').slice(5,6)}}<br>
+              {{'notification.bugStatusUpdated.oldStatus' | translate}}: {{notificationDTO.message.split(';').slice(6,7)}}
+
+
+              <!--              Severity: {{notificationDTO.message.split(',').slice(5,6)}} <br><br>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+
+<p-dialog [closable]="true" [(visible)]="details" [style]="{width: '450px'}" header="Notification details"
+          [modal]="true" styleClass="p-fluid">
+</p-dialog>

@@ -1,0 +1,41 @@
+<div class="lang">
+  <label class = "">{{'login.language'|translate}}</label>&nbsp;
+  <span class="lang-dropdown">
+          <select
+            #selectedLang
+            (change)="switchLang(selectedLang.value)">
+            <option *ngFor="let language of translate.getLangs()"
+                    [value]="language"
+                    [selected]="language === translate.currentLang">
+              {{ language }}
+            </option>
+          </select>
+        </span>
+</div>
+
+<div class="unsupported-container">
+  <div id="hello" class="hidden">
+    {{'unsupported.hello'| translate}}
+  </div>
+  <div id="bad-news" class="hidden">
+    {{'unsupported.bad-news'| translate}}<br>
+    {{'unsupported.not-supported'| translate}}
+  </div>
+  <div id="alt-browsers" class="hidden">
+    {{'unsupported.suggest'| translate}}
+    <br><br>
+    <div id="browsers" class="hidden">
+      {{'unsupported.go-and-try'| translate}}<br>
+      <a href="https://www.google.com/chrome/">
+        <img src="./assets/logos/chrome.png" class="logo">
+        Google Chrome
+      </a>
+      <br>
+      <a href="https://www.mozilla.org/en-US/firefox/new/">
+        <img src="./assets/logos/Firefox.png" class="logo">
+        Mozilla Firefox
+      </a>
+      <br>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<app-navigation-toolbar></app-navigation-toolbar>
+
+<div class="container1">
+  <br>
+  <div class="back_btn">
+    <p-button icon="pi pi-chevron-left" label="{{'editbug.back'| translate}}"
+              onClick="location.href='http://localhost:4200/bugs'"></p-button>
+  </div>
+  <h1>{{'editbug.header'| translate}} '{{bug.title}}'</h1>
+  <br>
+  <form [formGroup]="editBugForm">
+    <div class="form-group">
+      <label for="title">{{'bug-list.title'| translate}}</label>
+      <input type="text" class="form-control" id="title" formControlName="title" required autocomplete="off">
+      <div *ngIf="!editBugForm.controls.title.valid && !editBugForm.controls.title.untouched"
+           class="alert alert-danger">
+        {{'editbug.required'| translate}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">{{'editbug.description'| translate}}</label>
+      <textarea id="description" class="form-control" rows="10" cols="70" formControlName="description"
+                required></textarea>
+      <div *ngIf="!editBugForm.controls.description.valid && !editBugForm.controls.description.untouched"
+           class="alert alert-danger">
+        {{'editbug.desc-alert'| translate}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="severity">{{'bug-list.severity'| translate}}</label><br>
+      <p-dropdown id="severity" formControlName="severity" [options]="severityList"
+                  [(ngModel)]="bug.severity"
+                  [style]="{'width':'100%', 'font-family': 'Poppins, sans-serif', 'font-weight': 550}"></p-dropdown>
+      <div *ngIf="!editBugForm.controls.severity.valid" class="alert alert-danger">
+        {{'editbug.severity-alert'| translate}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="status">{{'bug-list.status'| translate}}</label><br>
+      <p-dropdown id="status" formControlName="status" [options]="statusList"
+                  [(ngModel)]="bug.status"
+                  [style]="{'width':'100%', 'font-family': 'Poppins, sans-serif', 'font-weight': 550}"></p-dropdown>
+      <div *ngIf="!editBugForm.controls.status.valid" class="alert alert-danger">
+        {{'editbug.status-alert'| translate}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="version">{{'bug-list.version'| translate}}</label>
+      <input type="text" id="version" class="form-control" formControlName="version" required autocomplete="off">
+      <div *ngIf="!editBugForm.controls.version.valid && !editBugForm.controls.version.untouched"
+           class="alert alert-danger">
+        {{'editbug.version-alert'| translate}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="fixed-version">{{'editbug.fixed-label'| translate}}</label>
+      <input type="text" id="fixed-version" class="form-control" formControlName="fixedVersion"
+             autocomplete="off">
+      <div *ngIf="!editBugForm.controls.fixedVersion.valid && !editBugForm.controls.fixedVersion.untouched"
+           class="alert alert-danger">
+        {{'editbug.fixed-alert'| translate}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="assigned-to">{{'editbug.assigned-label'| translate}}</label><br>
+      <p-autoComplete id="assigned-to" [(ngModel)]="formControlValue" [suggestions]="output"
+                      (completeMethod)="findChoices($event.query)"
+                      formControlName="assignedToUsername"
+                      [formGroup]="editBugForm"
+                      [style]="{'width':'100%'}"
+                      [inputStyle]="{'font-family': 'Poppins, sans-serif'}"
+                      placeholder="{{'editbug.assigned-placeholder'| translate}}" [dropdown]="true"></p-autoComplete>
+    </div>
+
+    <div class="form-group">
+      <label for="existing-attachments">{{'editbug.existing-att'| translate}}</label><br>
+      <div *ngIf="bug.attachments.length !== 0 && bug.attachments.length > filesToDelete.length" class="form-control"
+           id="existing-attachments">
+        <div class="anchorToDownloadAttachment" *ngFor="let att of bug.attachments" id="attachment_{{att.attContent}}">
+          <button (click)="deleteAttachment(att.attContent)" type="button" class="btn btn-primary btn-sm">✖</button>&nbsp;&nbsp;
+          <a href="http://localhost:4300/bugs/{{bug.idBug}}/attachments/{{att.attContent}}">
+            {{att.attContent}}
+          </a><br>
+        </div>
+      </div>
+      <div *ngIf="bug.attachments.length === 0">{{'editbug.no-att'| translate}}</div>
+      <div *ngIf="bug.attachments.length !== 0 && bug.attachments.length === filesToDelete.length">
+        {{'editbug.delete-att'| translate}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="attachments">{{'editbug.attachment'| translate}}</label><br>
+      <div class="form-control" id="file-upload">
+        <input type="file" id="attachments" formControlName="attachments" multiple
+               accept="image/*, application/pdf, application/msword,
+                 application/vnd.openxmlformats-officedocument.wordprocessingml.document
+                application/vnd.oasis.opendocument.spreadsheet,
+                application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+                application/vnd.ms-excel" (change)="onFileChange($event)"><br>
+        <span class="file-upload-text-ok" id="file-upload-text-new-bug">
+            {{'editbug.accepted-att'| translate}}
+          </span><br>
+        <span class="file-upload-text-ok" id="file-upload-size-text">
+            {{'editbug.size'| translate}}
+          </span>
+      </div>
+    </div>
+
+    <button type="button" *ngIf="!buttonPushed" class="btn btn-default" (click)="onSubmit()"
+            [disabled]="!isAllValid() || (editBugForm.pristine && filesToDelete.length === 0)">{{'editbug.save'| translate}}
+    </button>
+    <div *ngIf="buttonPushed" class="btn btn-default">{{'editbug.processing'| translate}}</div>
+  </form>
+</div>

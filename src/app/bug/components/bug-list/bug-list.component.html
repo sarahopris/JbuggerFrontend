@@ -1,0 +1,158 @@
+<app-navigation-toolbar></app-navigation-toolbar>
+
+
+<p-toolbar styleClass="p-mb-4">
+  <ng-template pTemplate="left">
+    <button pButton label=" {{'bug-list.new-label'| translate}}" icon="pi pi-plus" class="p-button-success p-mr-2"
+            style="margin-right: 3px;"
+            (click)="openNewBugPage()"></button>
+    <button pButton label="Export Excel" icon="pi pi-save" class="export"
+            (click)="exportExcel()"></button>
+    <button pButton label=" {{'bug-list.chart-label'| translate}}" icon="far fa-chart-bar" class="chart"
+            (click)="openChartDialog()"></button>
+  </ng-template>
+  <ng-template pTemplate="right">
+    <i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
+    <input pInputText type="text" placeholder="{{'bug-list.search'| translate}}" class="p-column-filter"
+           [(ngModel)]="listFilter" (ngModelChange)="filterBugs()">
+  </ng-template>
+</p-toolbar>
+
+<div class="bug_list">
+  <p-table #dt id="bug_tabel" [value]="bugList" [rows]="25" columnResizeMode="expand"
+           [paginator]="true" styleClass="p-datatable-gridlines" [rowHover]="true"
+           currentPageReportTemplate="{{'bug-list.current'| translate}}"
+           [showCurrentPageReport]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="title">
+          {{'bug-list.title'| translate}}
+          <div class="icons">
+            <p-sortIcon field="title"></p-sortIcon>
+            <p-columnFilter type="text" field="title" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="description">
+          {{'bug-list.description'| translate}}
+          <div class="icons">
+            <p-sortIcon field="description"></p-sortIcon>
+            <p-columnFilter type="text" field="description" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="createdByUsername">
+          {{'bug-list.created'| translate}}
+          <div class="icons">
+            <p-sortIcon field="createdByUsername"></p-sortIcon>
+            <p-columnFilter field="createdByUsername" matchMode="in" display="menu" [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false">
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-multiSelect [ngModel]="value" [options]="usersList" placeholder="Select user"
+                               (onChange)="filter($event.value)" optionLabel="username" optionValue="username">
+                </p-multiSelect>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="assignedToUsername">
+          {{'bug-list.assigned'| translate}}
+          <div class="icons">
+            <p-sortIcon field="assignedToUsername"></p-sortIcon>
+            <p-columnFilter field="assignedToUsername" matchMode="in" display="menu" [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false">
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-multiSelect [ngModel]="value" [options]="usersList" placeholder="Select user"
+                               (onChange)="filter($event.value)" optionLabel="username" optionValue="username">
+                </p-multiSelect>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="version">
+          {{'bug-list.version'| translate}}
+          <div class="icons">
+            <p-sortIcon field="version"></p-sortIcon>
+            <p-columnFilter type="text" field="version" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="fixedVersion">
+          {{'bug-list.fixed'| translate}}
+          <div class="icons">
+            <p-sortIcon field="fixedVersion"></p-sortIcon>
+            <p-columnFilter type="text" field="fixedVersion" display="menu"></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="severity">
+          {{'bug-list.severity'| translate}}
+          <div class="icons">
+            <p-sortIcon field="severity"></p-sortIcon>
+            <p-columnFilter field="severity" matchMode="in" display="menu" [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false">
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-multiSelect [ngModel]="value" [options]="severityList" placeholder="Select severity"
+                               (onChange)="filter($event.value)" optionLabel="name" optionValue="name">
+                </p-multiSelect>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="status">
+          {{'bug-list.status'| translate}}
+          <div class="icons">
+            <p-sortIcon field="status"></p-sortIcon>
+            <p-columnFilter field="status" matchMode="in" display="menu" [showMatchModes]="false"
+                            [showOperator]="false" [showAddButton]="false">
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-multiSelect [ngModel]="value" [options]="statusList" placeholder="Select status"
+                               (onChange)="filter($event.value)" optionLabel="name" optionValue="name">
+                </p-multiSelect>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="targetDate">
+          {{'bug-list.date'| translate}}
+          <div class="icons">
+            <p-sortIcon field="targetDate"></p-sortIcon>
+            <p-columnFilter type="date" field="targetDate" matchMode="dateFilter" display="menu"
+                            [showMatchModes]="false" [showAddButton]="false" [showOperator]="false">
+            </p-columnFilter>
+          </div>
+        </th>
+        <th class="buttons">{{'bug-list.actions' | translate}}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-bug>
+      <tr>
+        <td>{{bug.title}}</td>
+        <td pTooltip="{{bug.description}}">{{bug.description }}</td>
+        <td>{{bug.createdByUsername}}</td>
+        <td>{{bug.assignedToUsername}}</td>
+        <td>{{bug.version}}</td>
+        <td>{{bug.fixedVersion !== null ? bug.fixedVersion : 'Not Fixed'}}</td>
+        <td>{{bug.severity}}</td>
+        <td id="bug-status-{{bug.idBug}}">{{bug.status}}</td>
+        <td>{{bug.targetDate === null ? 'No target date' : bug.targetDate | date:'d.M.Y'}}</td>
+        <td class="bug_btn">
+          <button pButton pTooltip="Info" (click)="navigateToBug(bug)" icon="pi pi-book" class="info_btn"></button>
+          <button pButton pTooltip="{{'bug-list.edit'| translate}}" (click)="navigateToEditBug(bug)" icon="pi pi-pencil"
+                  class="ed_btn"></button>
+          <button *ngIf="hasCloseBugPermission" pButton pTooltip="{{'bug-list.close'| translate}}"
+                  (click)="closeBug(bug)" icon="pi pi-lock" class="del_btn"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+
+
+
+<p-dialog [closable]="true" [(visible)]="openDialog"  [style]="{width: '1000px'}" header="{{'openChartDialog'| translate}}" [modal]="true" styleClass="p-fluid">
+  <p-chart type="doughnut" [data]="data" [options]="chartOptions" [style]="{'width': '95%', height: '95%'}"></p-chart>
+</p-dialog>
+
+
+
+
+
+<router-outlet></router-outlet>
